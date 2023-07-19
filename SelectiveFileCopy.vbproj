@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6816FBAF-E05E-4DF9-B4FD-BFE005F50849}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>SelectiveFileCopy.My.MyApplication</StartupObject>
+    <RootNamespace>SelectiveFileCopy</RootNamespace>
+    <AssemblyName>SelectiveFileCopy</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\iconfinder_move_to_folder_64482.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>SelectiveFileCopy.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SelectiveFileCopy.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FolderBrowerDialog2">
+      <HintPath>..\FolderBrowserDialog2\bin\Release\FolderBrowerDialog2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Binary.vb" />
+    <Compile Include="Enums\Steps.vb" />
+    <Compile Include="TreeNodes\NameComparer.vb" />
+    <Compile Include="TreeNodes\SizeComparer.vb" />
+    <Compile Include="Enums\DestinationTypes.vb" />
+    <Compile Include="TreeNodes\MyFile.vb" />
+    <Compile Include="TreeNodes\MyFolder.vb" />
+    <Compile Include="UIComponent\MainWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIComponent\MainWindow.Designer.vb">
+      <DependentUpon>MainWindow.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ICopyListener.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UIComponent\Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponent\Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIComponent\OnFileExists.Designer.vb">
+      <DependentUpon>OnFileExists.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponent\OnFileExists.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TreeNodes\OnOff.vb" />
+    <Compile Include="Registerer.vb" />
+    <Compile Include="TreeNodes\SigmaOnOff.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UIComponent\MainWindow.resx">
+      <DependentUpon>MainWindow.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponent\Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIComponent\OnFileExists.resx">
+      <DependentUpon>OnFileExists.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\iconfinder_move_to_folder_64482.ico" />
+    <Content Include="Resources\pn-add-source-copy.gif" />
+    <Content Include="Resources\pn-add-source-copy.ico" />
+    <None Include="Resources\AddFile_16x21.png" />
+    <None Include="Resources\ASX_Copy_blue_16x.png" />
+    <None Include="Resources\AddFile_16x.png" />
+    <None Include="Resources\AddFile_16x1.png" />
+    <None Include="Resources\AddFile_16x2.png" />
+    <None Include="Resources\AddFolder_16x.png" />
+    <None Include="Resources\Add_16x.png" />
+    <None Include="Resources\Add_8x_16x.png" />
+    <None Include="Resources\Backslash_16x.png" />
+    <None Include="Resources\BlankFile_16x.png" />
+    <None Include="Resources\Cancel_16xSM.png" />
+    <None Include="Resources\ContinuousFolder_16x.png" />
+    <None Include="Resources\ContinuousFolder_16x1.png" />
+    <None Include="Resources\DeleteFolder_16x.png" />
+    <None Include="Resources\DeleteFolder_16x1.png" />
+    <None Include="Resources\DestinationAssistant_16x.png" />
+    <None Include="Resources\FileDestination_16x.png" />
+    <None Include="Resources\FilteredFolderOpen.png" />
+    <None Include="Resources\FindinFiles_16x.png" />
+    <None Include="Resources\Folder_16x.png" />
+    <None Include="Resources\Folder_16x1.png" />
+    <None Include="Resources\Folder_6221.png" />
+    <None Include="Resources\GraphTopToBottom_16x.png" />
+    <None Include="Resources\NoResults_16x.png" />
+    <None Include="Resources\OpenFile_16x.png" />
+    <None Include="Resources\OpenFolder_16x.png" />
+    <None Include="Resources\Pause_16x.png" />
+    <None Include="Resources\RecursivelyUncheckAll_16x.png" />
+    <None Include="Resources\RunChecked_16x.png" />
+    <None Include="Resources\Run_16x.png" />
+    <None Include="Resources\StartHierarchy_16x.png" />
+    <None Include="Resources\Stop_16x.png" />
+    <None Include="Resources\UpdateDatabase_16x.png" />
+    <None Include="Resources\UpdateLinkedTable_16x.png" />
+    <None Include="Resources\UpdatedScript_16x.png" />
+    <None Include="Resources\VBWorkflowManagerActivity_16x.png" />
+    <None Include="Resources\WelcomeSampleFolder_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FolderBrowserDialog2\FolderBrowserDialog2.csproj">
+      <Project>{d974ba88-46c6-4ac1-abee-0c2607e7949b}</Project>
+      <Name>FolderBrowserDialog2</Name>
+    </ProjectReference>
+    <ProjectReference Include="Aga.Controls\Aga.Controls.csproj">
+      <Project>{e73bb233-d88b-44a7-a98f-d71ee158381d}</Project>
+      <Name>Aga.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
