@@ -105,11 +105,12 @@ Public Class MyFolder
         listener.OnCopying(dir, newDir)
         Try
             Try
+                Dim myPath = IO.Path.Combine(path, Name)
                 For Each node As OnOff In MyBase.list
                     If TypeOf (node) Is MyFile Then
-                        CType(node, MyFile).CopyTo(destination, path, listener)
+                        CType(node, MyFile).CopyTo(destination, myPath, listener)
                     ElseIf TypeOf (node) Is MyFolder Then
-                        CType(node, MyFolder).CopyTo(destination, IO.Path.Combine(path, Name), listener)
+                        CType(node, MyFolder).CopyTo(destination, myPath, listener)
                     End If
                 Next
                 listener.OnCopied(dir, newDir)
