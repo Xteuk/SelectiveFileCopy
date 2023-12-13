@@ -7,6 +7,7 @@ Public Class MainWindow
 
     Private contentModel As TreeModel
     Private registerer As New Registerer(Me)
+    Private Configuration As Configuration = Nothing
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         'registerer.UpdateFunction = AddressOf RequestTreesUpdate
@@ -21,6 +22,8 @@ Public Class MainWindow
         Me.Icon = My.Resources.iconfinder_move_to_folder_64482
         TabControl1.SelectedIndex = 1
 
+        Configuration.Read()
+
     End Sub
 
     Private Sub ThreadedLoadDir()
@@ -34,6 +37,7 @@ Public Class MainWindow
             'CType(ByNamesTreeView.Model, SortedTreeModel).Comparer = comparerOn
 
             Try
+                Configuration.Root = rootDir
                 Dim my_root As MyFolder = New MyFolder(rootDir)
                 contentModel.Root.Nodes.Add(my_root)
                 MainTreeView.AllNodes.First().Expand()
@@ -237,7 +241,7 @@ Public Class MainWindow
         End Try
     End Sub
 
-    Private Sub OnCopyStart()
+    Private Sub StartCopy()
 
         Dim parent As MyFolder = contentModel.Root.Nodes(0)
 
@@ -403,21 +407,25 @@ Public Class MainWindow
         MainTreeView.Enabled = Not CurrentStep = Steps.Running
         FoldersTreeView.Enabled = Not CurrentStep = Steps.Running
         ByTypesTreeView.Enabled = Not CurrentStep = Steps.Running
-        destinationTypeCB.Enabled = Not CurrentStep = Steps.Running
+        'destinationTypeCB.Enabled = Not CurrentStep = Steps.Running
         destinationPathTBX.Enabled = Not CurrentStep = Steps.Running
-        destinationPathBTN.Enabled = Not CurrentStep = Steps.Running
+        'destinationPathBTN.Enabled = Not CurrentStep = Steps.Running
+
+        ToolStrip1.Enabled = Not CurrentStep = Steps.Running
+        MenuStrip1.Enabled = Not CurrentStep = Steps.Running
 
         Me.Update()
     End Sub
 
+    Private InputDirPath As String
     Private Sub Form1_Shown(sender As System.Object, e As System.EventArgs) Handles MyBase.Shown
         If loaded Then Return
         TreeViewAdv1_ColumnWidthChanged(MainTreeView, New Aga.Controls.Tree.TreeColumnEventArgs(MainTreeView.Columns(1)))
         TreeViewAdv1_ColumnWidthChanged(FoldersTreeView, New Aga.Controls.Tree.TreeColumnEventArgs(FoldersTreeView.Columns(1)))
         loaded = True
         If My.Application.CommandLineArgs.Count > 0 Then
-            InputDirPath.Text = My.Application.CommandLineArgs(0)
-            LoadDir(New IO.DirectoryInfo(InputDirPath.Text))
+            InputDirPath = My.Application.CommandLineArgs(0)
+            LoadDir(New IO.DirectoryInfo(InputDirPath))
         End If
         For i As Integer = 1 To My.Application.CommandLineArgs.Count - 1
             Dim arg As String = My.Application.CommandLineArgs(i)
@@ -428,23 +436,23 @@ Public Class MainWindow
         'TextBox2.Text = "c:\temp2"
     End Sub
 
-    Private Sub inputDirBT_Click(sender As System.Object, e As System.EventArgs) _
-    Handles inputDirBT.Click
+    Private Sub OnSelectSourceClick(sender As System.Object, e As System.EventArgs) _
+    Handles ToolStripButton1.Click
         Dim browser As New FolderBrowser2
-        If InputDirPath.Text <> "" And IO.Directory.Exists(InputDirPath.Text) Then
-            browser.DirectoryPath = InputDirPath.Text
+        If InputDirPath <> "" And IO.Directory.Exists(InputDirPath) Then
+            browser.DirectoryPath = InputDirPath
         End If
         If browser.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            InputDirPath.Text = browser.DirectoryPath
-            Dim dir As New IO.DirectoryInfo(InputDirPath.Text)
+            InputDirPath = browser.DirectoryPath
+            Dim dir As New IO.DirectoryInfo(InputDirPath)
             If dir.Exists Then LoadDir(dir)
         End If
     End Sub
 
     Private pb1_ratio As Double = 1
     Private threadRunning As Threading.Thread = Nothing
-    Private Sub startCopyBT_Click(sender As System.Object, e As System.EventArgs) Handles startCopyBT.Click
-        OnCopyStart()
+    Private Sub OnStartCopyClick(sender As System.Object, e As System.EventArgs) Handles ToolStripButton5.Click, StartCoypingSelectedFilesToolStripMenuItem.Click
+        StartCopy()
         threadRunning = New Threading.Thread(AddressOf ThreadedCopy)
         threadRunning.Start()
     End Sub
@@ -468,18 +476,8 @@ Public Class MainWindow
 
     End Sub
 
-    Private Sub DestinationTypeCB_SelectedIndexChanged(sender As Object, e As EventArgs) _
-    Handles destinationTypeCB.SelectedIndexChanged
-        If destinationTypeCB.SelectedIndex = 0 Then
-            DestinationType = DestinationTypes.Folder
-        Else
-            DestinationType = DestinationTypes.ZipFile
-        End If
-        UpdateUI()
-    End Sub
-
     Private dirDestBrowseDLG As New FolderBrowser2()
-    Private Sub FolderButton_Click(sender As Object, e As EventArgs) Handles destinationPathBTN.Click
+    Private Sub OpenSelectFileDialog()
 
         Select Case DestinationType
             Case DestinationTypes.Folder
@@ -528,8 +526,14 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub TopPanel_Paint(sender As Object, e As PaintEventArgs) Handles TopPanel.Paint
+    Private Sub OnSelectDestinationFolderClick(sender As Object, e As EventArgs) Handles SelectDestinationasFolderToolStripMenuItem.Click, ToolStripButton2.Click
+        DestinationType = DestinationTypes.Folder
+        OpenSelectFileDialog()
+    End Sub
 
+    Private Sub OnSelectDestinationZipFileClick(sender As Object, e As EventArgs) Handles SelectDestinationasZipFileToolStripMenuItem.Click, ToolStripButton3.Click
+        DestinationType = DestinationTypes.ZipFile
+        OpenSelectFileDialog()
     End Sub
 
 #End Region

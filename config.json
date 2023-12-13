@@ -1,0 +1,10 @@
+﻿{
+  "IgnoredFolders": [
+    "**/.vs",
+    "**/.git",
+    "**/bin",
+    "**/obj",
+    "**/packages",
+    "**/Setup"
+  ]
+}

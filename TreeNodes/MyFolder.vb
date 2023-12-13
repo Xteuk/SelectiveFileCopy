@@ -17,22 +17,11 @@ Public Class MyFolder
         End Get
     End Property
 
-    'Public Overrides ReadOnly Property Count As Integer
-    '    Get
-    '        Dim i As Integer = 0
-    '        i = Nodes.Cast(Of OnOff).Sum(Function(x) x.Count)
-    '        Return i
-    '    End Get
-    'End Property
-
     Public Sub LoadInfos(ByVal registerer As Registerer)
 
         Count = 0
 
         Try
-            'dir.GetDirectories("*", IO.SearchOption.AllDirectories)
-            'dir.GetFiles("*", IO.SearchOption.AllDirectories)
-
             Dim folders = dir.EnumerateDirectories()
             Dim my_folders As New List(Of MyFolder)
             For Each subdir As IO.DirectoryInfo In folders
@@ -48,14 +37,19 @@ Public Class MyFolder
             Next
 
             Dim files = dir.EnumerateFiles()
-            'Count += files.Length
+
             For Each file As IO.FileInfo In files
                 Dim my_file As New MyFile(file)
-                'Nodes.Add(my_file)
                 Add(my_file)
                 Count += 1
                 registerer.register(my_file)
             Next
+
+            Dim relative = Helper.GetRelativePath(Configuration.Root.FullName, dir.FullName)
+            If Configuration.IsIgnoredFolder(relative) Then
+                Selected = CheckState.Unchecked
+            End If
+
         Catch ex As System.Threading.ThreadAbortException
             ' rien
         Catch ex As Exception

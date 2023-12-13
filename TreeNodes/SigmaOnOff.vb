@@ -17,21 +17,21 @@ Public Class SigmaOnOff
         AddHandler one.StatusChanged, AddressOf ElementChanged
     End Sub
 
-    Public Sub Recompute(Optional ByVal recompute_children As Boolean = False)
-        recomputing = True
-        Dim total As New Binary
-        Try
-            For Each element As OnOff In list
-                If recompute_children And TypeOf (element) Is SigmaOnOff Then
-                    CType(element, SigmaOnOff).Recompute(True)
-                End If
-                total += element.Size
-            Next
-        Finally
-            recomputing = False
-        End Try
-        setSizes(total.selectedSize, total.realSize)
-    End Sub
+    'Public Sub Recompute(Optional ByVal recompute_children As Boolean = False)
+    '    recomputing = True
+    '    Dim total As New Binary
+    '    Try
+    '        For Each element As OnOff In list
+    '            If recompute_children And TypeOf (element) Is SigmaOnOff Then
+    '                CType(element, SigmaOnOff).Recompute(True)
+    '            End If
+    '            total += element.Size
+    '        Next
+    '    Finally
+    '        recomputing = False
+    '    End Try
+    '    setSizes(total.selectedSize, total.realSize)
+    'End Sub
 
     Private Sub ElementChanged(ByRef before As OnOff, ByRef now As OnOff)
         If Not recomputing Then _

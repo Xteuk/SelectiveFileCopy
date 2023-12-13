@@ -23,16 +23,11 @@ Partial Class MainWindow
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.InputDirPath = New System.Windows.Forms.TextBox()
-        Me.inputDirBT = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeselectAllByExtensionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeselectAllByNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllByExtensionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllByNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TopPanel = New System.Windows.Forms.Panel()
         Me.CenterPanel = New System.Windows.Forms.Panel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.MainTreeView = New Aga.Controls.Tree.TreeViewAdv()
@@ -69,13 +64,10 @@ Partial Class MainWindow
         Me.spring = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ProgressLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LoadUpdateTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.destinationPathBTN = New System.Windows.Forms.Button()
         Me.destinationPathTBX = New System.Windows.Forms.TextBox()
-        Me.startCopyBT = New System.Windows.Forms.Button()
         Me.BottomPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.destinationTypeCB = New System.Windows.Forms.ComboBox()
         Me.numberProgress = New System.Windows.Forms.ProgressBar()
         Me.sizeProgress = New System.Windows.Forms.ProgressBar()
         Me.fileDestBrowseDLG = New System.Windows.Forms.SaveFileDialog()
@@ -88,8 +80,42 @@ Partial Class MainWindow
         Me.TBName2 = New Aga.Controls.Tree.NodeControls.NodeTextBox()
         Me.TBSize2 = New Aga.Controls.Tree.NodeControls.NodeTextBox()
         Me.TBSelection2 = New Aga.Controls.Tree.NodeControls.NodeCheckBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectDestinationasFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectDestinationasZipFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyIncludesRootFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RunToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartCoypingSelectedFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PauseCopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StopCopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InfosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FiledestinationNotSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileAddedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileUpdatedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IgnoredFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileIgnoredToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FolderdestinationNotSelectedYetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewFolderWillBeAddedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExistingFolderWillBeUpdatedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IgnoredFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExistingFolderWillBeDeletedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStrip1.SuspendLayout()
-        Me.TopPanel.SuspendLayout()
         Me.CenterPanel.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -100,27 +126,9 @@ Partial Class MainWindow
         Me.ByTypesTab.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.BottomPanel3.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'InputDirPath
-        '
-        Me.InputDirPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.InputDirPath.Location = New System.Drawing.Point(65, 12)
-        Me.InputDirPath.Name = "InputDirPath"
-        Me.InputDirPath.ReadOnly = True
-        Me.InputDirPath.Size = New System.Drawing.Size(550, 20)
-        Me.InputDirPath.TabIndex = 0
-        '
-        'inputDirBT
-        '
-        Me.inputDirBT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.inputDirBT.Location = New System.Drawing.Point(621, 10)
-        Me.inputDirBT.Name = "inputDirBT"
-        Me.inputDirBT.Size = New System.Drawing.Size(38, 23)
-        Me.inputDirBT.TabIndex = 1
-        Me.inputDirBT.Text = "..."
-        Me.inputDirBT.UseVisualStyleBackColor = True
         '
         'ContextMenuStrip1
         '
@@ -154,50 +162,15 @@ Partial Class MainWindow
         Me.SelectAllByNameToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SelectAllByNameToolStripMenuItem.Text = "Select all by name"
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 15)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(47, 13)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Source :"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Enabled = False
-        Me.CheckBox1.Location = New System.Drawing.Point(664, 14)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(119, 17)
-        Me.CheckBox1.TabIndex = 13
-        Me.CheckBox1.Text = "Include Root Folder"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'TopPanel
-        '
-        Me.TopPanel.Controls.Add(Me.CheckBox1)
-        Me.TopPanel.Controls.Add(Me.Label2)
-        Me.TopPanel.Controls.Add(Me.InputDirPath)
-        Me.TopPanel.Controls.Add(Me.inputDirBT)
-        Me.TopPanel.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TopPanel.Location = New System.Drawing.Point(0, 0)
-        Me.TopPanel.Name = "TopPanel"
-        Me.TopPanel.Size = New System.Drawing.Size(952, 46)
-        Me.TopPanel.TabIndex = 14
-        '
         'CenterPanel
         '
         Me.CenterPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CenterPanel.Controls.Add(Me.SplitContainer1)
         Me.CenterPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CenterPanel.Location = New System.Drawing.Point(0, 46)
+        Me.CenterPanel.Location = New System.Drawing.Point(0, 49)
         Me.CenterPanel.Name = "CenterPanel"
         Me.CenterPanel.Padding = New System.Windows.Forms.Padding(5)
-        Me.CenterPanel.Size = New System.Drawing.Size(952, 418)
+        Me.CenterPanel.Size = New System.Drawing.Size(918, 526)
         Me.CenterPanel.TabIndex = 15
         '
         'SplitContainer1
@@ -213,8 +186,8 @@ Partial Class MainWindow
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.TabControl1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(938, 404)
-        Me.SplitContainer1.SplitterDistance = 671
+        Me.SplitContainer1.Size = New System.Drawing.Size(904, 512)
+        Me.SplitContainer1.SplitterDistance = 646
         Me.SplitContainer1.TabIndex = 2
         '
         'MainTreeView
@@ -242,7 +215,7 @@ Partial Class MainWindow
         Me.MainTreeView.NodeControls.Add(Me.CBSelection)
         Me.MainTreeView.NodeControls.Add(Me.TBNb)
         Me.MainTreeView.SelectedNode = Nothing
-        Me.MainTreeView.Size = New System.Drawing.Size(671, 404)
+        Me.MainTreeView.Size = New System.Drawing.Size(646, 512)
         Me.MainTreeView.TabIndex = 0
         Me.MainTreeView.Text = "TreeViewAdv1"
         Me.MainTreeView.UseColumns = True
@@ -339,7 +312,7 @@ Partial Class MainWindow
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(263, 404)
+        Me.TabControl1.Size = New System.Drawing.Size(254, 512)
         Me.TabControl1.TabIndex = 1
         '
         'FoldersTab
@@ -348,7 +321,7 @@ Partial Class MainWindow
         Me.FoldersTab.Location = New System.Drawing.Point(4, 22)
         Me.FoldersTab.Name = "FoldersTab"
         Me.FoldersTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.FoldersTab.Size = New System.Drawing.Size(255, 378)
+        Me.FoldersTab.Size = New System.Drawing.Size(246, 486)
         Me.FoldersTab.TabIndex = 0
         Me.FoldersTab.Text = "Folders"
         Me.FoldersTab.UseVisualStyleBackColor = True
@@ -373,7 +346,7 @@ Partial Class MainWindow
         Me.FoldersTreeView.NodeControls.Add(Me.NodeCheckBox1)
         Me.FoldersTreeView.SelectedNode = Nothing
         Me.FoldersTreeView.ShowLines = False
-        Me.FoldersTreeView.Size = New System.Drawing.Size(249, 372)
+        Me.FoldersTreeView.Size = New System.Drawing.Size(240, 480)
         Me.FoldersTreeView.TabIndex = 0
         Me.FoldersTreeView.Text = "TreeViewAdv2"
         Me.FoldersTreeView.UseColumns = True
@@ -430,7 +403,7 @@ Partial Class MainWindow
         Me.ByTypesTab.Location = New System.Drawing.Point(4, 22)
         Me.ByTypesTab.Name = "ByTypesTab"
         Me.ByTypesTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.ByTypesTab.Size = New System.Drawing.Size(255, 378)
+        Me.ByTypesTab.Size = New System.Drawing.Size(255, 329)
         Me.ByTypesTab.TabIndex = 1
         Me.ByTypesTab.Text = "By Types"
         Me.ByTypesTab.UseVisualStyleBackColor = True
@@ -455,7 +428,7 @@ Partial Class MainWindow
         Me.ByTypesTreeView.NodeControls.Add(Me.NodeCheckBox2)
         Me.ByTypesTreeView.SelectedNode = Nothing
         Me.ByTypesTreeView.ShowLines = False
-        Me.ByTypesTreeView.Size = New System.Drawing.Size(249, 372)
+        Me.ByTypesTreeView.Size = New System.Drawing.Size(249, 323)
         Me.ByTypesTreeView.TabIndex = 1
         Me.ByTypesTreeView.Text = "TreeViewAdv3"
         Me.ByTypesTreeView.UseColumns = True
@@ -510,9 +483,9 @@ Partial Class MainWindow
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusLabel, Me.spring, Me.ProgressLabel2})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 529)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 637)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(952, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(918, 22)
         Me.StatusStrip1.TabIndex = 17
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -538,32 +511,15 @@ Partial Class MainWindow
         Me.LoadUpdateTimer.Enabled = True
         Me.LoadUpdateTimer.Interval = 500
         '
-        'destinationPathBTN
-        '
-        Me.destinationPathBTN.Location = New System.Drawing.Point(780, 3)
-        Me.destinationPathBTN.Name = "destinationPathBTN"
-        Me.destinationPathBTN.Size = New System.Drawing.Size(38, 23)
-        Me.destinationPathBTN.TabIndex = 14
-        Me.destinationPathBTN.Text = "..."
-        Me.destinationPathBTN.UseVisualStyleBackColor = True
-        '
         'destinationPathTBX
         '
-        Me.destinationPathTBX.Location = New System.Drawing.Point(109, 3)
+        Me.destinationPathTBX.BackColor = System.Drawing.SystemColors.Window
+        Me.destinationPathTBX.Location = New System.Drawing.Point(75, 3)
         Me.destinationPathTBX.Name = "destinationPathTBX"
+        Me.destinationPathTBX.ReadOnly = True
         Me.destinationPathTBX.ShortcutsEnabled = False
         Me.destinationPathTBX.Size = New System.Drawing.Size(665, 20)
         Me.destinationPathTBX.TabIndex = 13
-        '
-        'startCopyBT
-        '
-        Me.startCopyBT.Location = New System.Drawing.Point(824, 3)
-        Me.startCopyBT.Name = "startCopyBT"
-        Me.BottomPanel3.SetRowSpan(Me.startCopyBT, 3)
-        Me.startCopyBT.Size = New System.Drawing.Size(125, 58)
-        Me.startCopyBT.TabIndex = 4
-        Me.startCopyBT.Text = "Start copy"
-        Me.startCopyBT.UseVisualStyleBackColor = True
         '
         'BottomPanel3
         '
@@ -575,30 +531,28 @@ Partial Class MainWindow
         Me.BottomPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.BottomPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.BottomPanel3.Controls.Add(Me.destinationPathTBX, 1, 0)
-        Me.BottomPanel3.Controls.Add(Me.destinationPathBTN, 2, 0)
         Me.BottomPanel3.Controls.Add(Me.Label4, 2, 2)
         Me.BottomPanel3.Controls.Add(Me.Label3, 2, 1)
-        Me.BottomPanel3.Controls.Add(Me.startCopyBT, 3, 0)
-        Me.BottomPanel3.Controls.Add(Me.destinationTypeCB, 0, 0)
         Me.BottomPanel3.Controls.Add(Me.numberProgress, 0, 1)
         Me.BottomPanel3.Controls.Add(Me.sizeProgress, 0, 2)
+        Me.BottomPanel3.Controls.Add(Me.Label1, 0, 0)
         Me.BottomPanel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BottomPanel3.Location = New System.Drawing.Point(0, 464)
+        Me.BottomPanel3.Location = New System.Drawing.Point(0, 575)
         Me.BottomPanel3.Name = "BottomPanel3"
         Me.BottomPanel3.RowCount = 3
         Me.BottomPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.BottomPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.BottomPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.BottomPanel3.Size = New System.Drawing.Size(952, 65)
+        Me.BottomPanel3.Size = New System.Drawing.Size(918, 62)
         Me.BottomPanel3.TabIndex = 14
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label4.Location = New System.Drawing.Point(780, 47)
+        Me.Label4.Location = New System.Drawing.Point(893, 44)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 18)
+        Me.Label4.Size = New System.Drawing.Size(22, 18)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Mb"
         '
@@ -606,39 +560,28 @@ Partial Class MainWindow
         '
         Me.Label3.AutoSize = True
         Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label3.Location = New System.Drawing.Point(780, 29)
+        Me.Label3.Location = New System.Drawing.Point(893, 26)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(38, 18)
+        Me.Label3.Size = New System.Drawing.Size(22, 18)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "#"
-        '
-        'destinationTypeCB
-        '
-        Me.destinationTypeCB.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.destinationTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.destinationTypeCB.FormattingEnabled = True
-        Me.destinationTypeCB.Items.AddRange(New Object() {"Folder", "Zip File"})
-        Me.destinationTypeCB.Location = New System.Drawing.Point(3, 3)
-        Me.destinationTypeCB.Name = "destinationTypeCB"
-        Me.destinationTypeCB.Size = New System.Drawing.Size(100, 21)
-        Me.destinationTypeCB.TabIndex = 15
         '
         'numberProgress
         '
         Me.BottomPanel3.SetColumnSpan(Me.numberProgress, 2)
         Me.numberProgress.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.numberProgress.Location = New System.Drawing.Point(3, 32)
+        Me.numberProgress.Location = New System.Drawing.Point(3, 29)
         Me.numberProgress.Name = "numberProgress"
-        Me.numberProgress.Size = New System.Drawing.Size(771, 12)
+        Me.numberProgress.Size = New System.Drawing.Size(884, 12)
         Me.numberProgress.TabIndex = 10
         '
         'sizeProgress
         '
         Me.BottomPanel3.SetColumnSpan(Me.sizeProgress, 2)
         Me.sizeProgress.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.sizeProgress.Location = New System.Drawing.Point(3, 50)
+        Me.sizeProgress.Location = New System.Drawing.Point(3, 47)
         Me.sizeProgress.Name = "sizeProgress"
-        Me.sizeProgress.Size = New System.Drawing.Size(771, 12)
+        Me.sizeProgress.Size = New System.Drawing.Size(884, 12)
         Me.sizeProgress.TabIndex = 6
         '
         'fileDestBrowseDLG
@@ -716,20 +659,292 @@ Partial Class MainWindow
         Me.TBSelection2.LeftMargin = 0
         Me.TBSelection2.ParentColumn = Nothing
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator4, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripSeparator1, Me.ToolStripButton4, Me.ToolStripSeparator2, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripButton7})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(918, 25)
+        Me.ToolStrip1.TabIndex = 20
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = Global.SelectiveFileCopy.My.Resources.Resources.OpenFolder_16x
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton1.Text = "ToolStripButton1"
+        Me.ToolStripButton1.ToolTipText = "Select Source Folder"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.SelectiveFileCopy.My.Resources.Resources.WelcomeSampleFolder_16x
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton2.Text = "ToolStripButton2"
+        Me.ToolStripButton2.ToolTipText = "Select Destination (as Folder)"
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton3.Image = Global.SelectiveFileCopy.My.Resources.Resources.DestinationAssistant_16x
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton3.Text = "ToolStripButton3"
+        Me.ToolStripButton3.ToolTipText = "Select Destination (as Zip file)"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripButton4
+        '
+        Me.ToolStripButton4.Checked = True
+        Me.ToolStripButton4.CheckOnClick = True
+        Me.ToolStripButton4.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton4.Image = Global.SelectiveFileCopy.My.Resources.Resources.GraphTopToBottom_16x
+        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton4.Name = "ToolStripButton4"
+        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton4.Text = "ToolStripButton4"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripButton5
+        '
+        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton5.Image = Global.SelectiveFileCopy.My.Resources.Resources.Run_16x
+        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton5.Text = "ToolStripButton5"
+        Me.ToolStripButton5.ToolTipText = "Start Copying selected files"
+        '
+        'ToolStripButton6
+        '
+        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.Enabled = False
+        Me.ToolStripButton6.Image = Global.SelectiveFileCopy.My.Resources.Resources.Pause_16x
+        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton6.Name = "ToolStripButton6"
+        Me.ToolStripButton6.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton6.Text = "ToolStripButton6"
+        '
+        'ToolStripButton7
+        '
+        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton7.Enabled = False
+        Me.ToolStripButton7.Image = Global.SelectiveFileCopy.My.Resources.Resources.Stop_16x
+        Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton7.Name = "ToolStripButton7"
+        Me.ToolStripButton7.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton7.Text = "ToolStripButton7"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.RunToolStripMenuItem, Me.InfosToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(918, 24)
+        Me.MenuStrip1.TabIndex = 21
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSourceToolStripMenuItem, Me.SelectDestinationasFolderToolStripMenuItem, Me.SelectDestinationasZipFileToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(126, 20)
+        Me.FileToolStripMenuItem.Text = "Source / Destination"
+        '
+        'SelectSourceToolStripMenuItem
+        '
+        Me.SelectSourceToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.OpenFolder_16x
+        Me.SelectSourceToolStripMenuItem.Name = "SelectSourceToolStripMenuItem"
+        Me.SelectSourceToolStripMenuItem.Size = New System.Drawing.Size(231, 22)
+        Me.SelectSourceToolStripMenuItem.Text = "Select Source Folder"
+        '
+        'SelectDestinationasFolderToolStripMenuItem
+        '
+        Me.SelectDestinationasFolderToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.WelcomeSampleFolder_16x
+        Me.SelectDestinationasFolderToolStripMenuItem.Name = "SelectDestinationasFolderToolStripMenuItem"
+        Me.SelectDestinationasFolderToolStripMenuItem.Size = New System.Drawing.Size(231, 22)
+        Me.SelectDestinationasFolderToolStripMenuItem.Text = "Select Destination (as Folder)"
+        '
+        'SelectDestinationasZipFileToolStripMenuItem
+        '
+        Me.SelectDestinationasZipFileToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.FileDestination_16x
+        Me.SelectDestinationasZipFileToolStripMenuItem.Name = "SelectDestinationasZipFileToolStripMenuItem"
+        Me.SelectDestinationasZipFileToolStripMenuItem.Size = New System.Drawing.Size(231, 22)
+        Me.SelectDestinationasZipFileToolStripMenuItem.Text = "Select Destination (as Zip File)"
+        '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyIncludesRootFolderToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Text = "Options"
+        '
+        'CopyIncludesRootFolderToolStripMenuItem
+        '
+        Me.CopyIncludesRootFolderToolStripMenuItem.Checked = True
+        Me.CopyIncludesRootFolderToolStripMenuItem.CheckOnClick = True
+        Me.CopyIncludesRootFolderToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CopyIncludesRootFolderToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.GraphTopToBottom_16x
+        Me.CopyIncludesRootFolderToolStripMenuItem.Name = "CopyIncludesRootFolderToolStripMenuItem"
+        Me.CopyIncludesRootFolderToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
+        Me.CopyIncludesRootFolderToolStripMenuItem.Text = "Copy includes Root folder"
+        '
+        'RunToolStripMenuItem
+        '
+        Me.RunToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartCoypingSelectedFilesToolStripMenuItem, Me.PauseCopyToolStripMenuItem, Me.StopCopyToolStripMenuItem})
+        Me.RunToolStripMenuItem.Name = "RunToolStripMenuItem"
+        Me.RunToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.RunToolStripMenuItem.Text = "Run"
+        '
+        'StartCoypingSelectedFilesToolStripMenuItem
+        '
+        Me.StartCoypingSelectedFilesToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.Run_16x
+        Me.StartCoypingSelectedFilesToolStripMenuItem.Name = "StartCoypingSelectedFilesToolStripMenuItem"
+        Me.StartCoypingSelectedFilesToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.StartCoypingSelectedFilesToolStripMenuItem.Text = "Start copying selected Files"
+        '
+        'PauseCopyToolStripMenuItem
+        '
+        Me.PauseCopyToolStripMenuItem.Enabled = False
+        Me.PauseCopyToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.Pause_16x
+        Me.PauseCopyToolStripMenuItem.Name = "PauseCopyToolStripMenuItem"
+        Me.PauseCopyToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.PauseCopyToolStripMenuItem.Text = "Pause copy"
+        '
+        'StopCopyToolStripMenuItem
+        '
+        Me.StopCopyToolStripMenuItem.Enabled = False
+        Me.StopCopyToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.Stop_16x
+        Me.StopCopyToolStripMenuItem.Name = "StopCopyToolStripMenuItem"
+        Me.StopCopyToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.StopCopyToolStripMenuItem.Text = "Stop copy"
+        '
+        'InfosToolStripMenuItem
+        '
+        Me.InfosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FiledestinationNotSelectedToolStripMenuItem, Me.FileAddedToolStripMenuItem, Me.FileUpdatedToolStripMenuItem, Me.IgnoredFileToolStripMenuItem, Me.FileIgnoredToolStripMenuItem, Me.ToolStripSeparator3, Me.FolderdestinationNotSelectedYetToolStripMenuItem, Me.NewFolderWillBeAddedToolStripMenuItem, Me.ExistingFolderWillBeUpdatedToolStripMenuItem, Me.IgnoredFolderToolStripMenuItem, Me.ExistingFolderWillBeDeletedToolStripMenuItem})
+        Me.InfosToolStripMenuItem.Enabled = False
+        Me.InfosToolStripMenuItem.Name = "InfosToolStripMenuItem"
+        Me.InfosToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
+        Me.InfosToolStripMenuItem.Text = "Infos"
+        '
+        'FiledestinationNotSelectedToolStripMenuItem
+        '
+        Me.FiledestinationNotSelectedToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.File_16x
+        Me.FiledestinationNotSelectedToolStripMenuItem.Name = "FiledestinationNotSelectedToolStripMenuItem"
+        Me.FiledestinationNotSelectedToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.FiledestinationNotSelectedToolStripMenuItem.Text = "File (destination not selected yet)"
+        '
+        'FileAddedToolStripMenuItem
+        '
+        Me.FileAddedToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.AddFile_16x
+        Me.FileAddedToolStripMenuItem.Name = "FileAddedToolStripMenuItem"
+        Me.FileAddedToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.FileAddedToolStripMenuItem.Text = "New file, will be added"
+        '
+        'FileUpdatedToolStripMenuItem
+        '
+        Me.FileUpdatedToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.UpdateFile_16x
+        Me.FileUpdatedToolStripMenuItem.Name = "FileUpdatedToolStripMenuItem"
+        Me.FileUpdatedToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.FileUpdatedToolStripMenuItem.Text = "Existing file, will be replaced"
+        '
+        'IgnoredFileToolStripMenuItem
+        '
+        Me.IgnoredFileToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.BlankFile_16x
+        Me.IgnoredFileToolStripMenuItem.Name = "IgnoredFileToolStripMenuItem"
+        Me.IgnoredFileToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.IgnoredFileToolStripMenuItem.Text = "Ignored file"
+        '
+        'FileIgnoredToolStripMenuItem
+        '
+        Me.FileIgnoredToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.DeleteFile_16
+        Me.FileIgnoredToolStripMenuItem.Name = "FileIgnoredToolStripMenuItem"
+        Me.FileIgnoredToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.FileIgnoredToolStripMenuItem.Text = "Existing file, will be deleted"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(260, 6)
+        '
+        'FolderdestinationNotSelectedYetToolStripMenuItem
+        '
+        Me.FolderdestinationNotSelectedYetToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.Folder_16x
+        Me.FolderdestinationNotSelectedYetToolStripMenuItem.Name = "FolderdestinationNotSelectedYetToolStripMenuItem"
+        Me.FolderdestinationNotSelectedYetToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.FolderdestinationNotSelectedYetToolStripMenuItem.Text = "Folder (destination not selected yet)"
+        '
+        'NewFolderWillBeAddedToolStripMenuItem
+        '
+        Me.NewFolderWillBeAddedToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.AddFolder_16x
+        Me.NewFolderWillBeAddedToolStripMenuItem.Name = "NewFolderWillBeAddedToolStripMenuItem"
+        Me.NewFolderWillBeAddedToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.NewFolderWillBeAddedToolStripMenuItem.Text = "New folder, will be added"
+        '
+        'ExistingFolderWillBeUpdatedToolStripMenuItem
+        '
+        Me.ExistingFolderWillBeUpdatedToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.UpdateFolder_16x
+        Me.ExistingFolderWillBeUpdatedToolStripMenuItem.Name = "ExistingFolderWillBeUpdatedToolStripMenuItem"
+        Me.ExistingFolderWillBeUpdatedToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.ExistingFolderWillBeUpdatedToolStripMenuItem.Text = "Existing folder, will be updated"
+        '
+        'IgnoredFolderToolStripMenuItem
+        '
+        Me.IgnoredFolderToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.IgnoredFolder_16x
+        Me.IgnoredFolderToolStripMenuItem.Name = "IgnoredFolderToolStripMenuItem"
+        Me.IgnoredFolderToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.IgnoredFolderToolStripMenuItem.Text = "Ignored folder"
+        '
+        'ExistingFolderWillBeDeletedToolStripMenuItem
+        '
+        Me.ExistingFolderWillBeDeletedToolStripMenuItem.Image = Global.SelectiveFileCopy.My.Resources.Resources.DeleteFolder_16x
+        Me.ExistingFolderWillBeDeletedToolStripMenuItem.Name = "ExistingFolderWillBeDeletedToolStripMenuItem"
+        Me.ExistingFolderWillBeDeletedToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.ExistingFolderWillBeDeletedToolStripMenuItem.Text = "Existing folder, will be deleted"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(3, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(66, 13)
+        Me.Label1.TabIndex = 14
+        Me.Label1.Text = "Destination :"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
         'MainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(952, 551)
+        Me.ClientSize = New System.Drawing.Size(918, 659)
         Me.Controls.Add(Me.CenterPanel)
-        Me.Controls.Add(Me.TopPanel)
+        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.BottomPanel3)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Name = "MainWindow"
         Me.Text = "Selective CopyFile"
         Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.TopPanel.ResumeLayout(False)
-        Me.TopPanel.PerformLayout()
         Me.CenterPanel.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -742,12 +957,14 @@ Partial Class MainWindow
         Me.StatusStrip1.PerformLayout()
         Me.BottomPanel3.ResumeLayout(False)
         Me.BottomPanel3.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents InputDirPath As System.Windows.Forms.TextBox
-    Friend WithEvents inputDirBT As System.Windows.Forms.Button
     Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
     Friend WithEvents MainTreeView As Aga.Controls.Tree.TreeViewAdv
     Friend WithEvents CBSelection As Aga.Controls.Tree.NodeControls.NodeCheckBox
@@ -764,13 +981,10 @@ Partial Class MainWindow
     Friend WithEvents DeselectAllByNameToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SelectAllByExtensionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SelectAllByNameToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents FoldersTab As TabPage
     Friend WithEvents ByTypesTab As TabPage
     Friend WithEvents ByTypesTreeView As Aga.Controls.Tree.TreeViewAdv
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents TopPanel As Panel
     Friend WithEvents CenterPanel As Panel
     Friend WithEvents NodeTextBox1 As Aga.Controls.Tree.NodeControls.NodeTextBox
     Friend WithEvents NodeTextBox2 As Aga.Controls.Tree.NodeControls.NodeTextBox
@@ -794,12 +1008,10 @@ Partial Class MainWindow
     Friend WithEvents NodeTextBox5 As Aga.Controls.Tree.NodeControls.NodeTextBox
     Friend WithEvents NodeTextBox6 As Aga.Controls.Tree.NodeControls.NodeTextBox
     Friend WithEvents NodeCheckBox3 As Aga.Controls.Tree.NodeControls.NodeCheckBox
-    Friend WithEvents startCopyBT As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents sizeProgress As ProgressBar
     Friend WithEvents numberProgress As ProgressBar
     Friend WithEvents Label4 As Label
-    Friend WithEvents destinationPathBTN As Button
     Friend WithEvents destinationPathTBX As TextBox
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents StatusLabel As ToolStripStatusLabel
@@ -810,5 +1022,39 @@ Partial Class MainWindow
     Friend WithEvents ProgressLabel2 As ToolStripStatusLabel
     Friend WithEvents LoadUpdateTimer As Timer
     Friend WithEvents fileDestBrowseDLG As SaveFileDialog
-    Friend WithEvents destinationTypeCB As ComboBox
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripButton2 As ToolStripButton
+    Friend WithEvents ToolStripButton3 As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripButton4 As ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripButton5 As ToolStripButton
+    Friend WithEvents ToolStripButton6 As ToolStripButton
+    Friend WithEvents ToolStripButton7 As ToolStripButton
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SelectSourceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SelectDestinationasFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SelectDestinationasZipFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CopyIncludesRootFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RunToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StartCoypingSelectedFilesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PauseCopyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StopCopyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InfosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FiledestinationNotSelectedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileAddedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileUpdatedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents IgnoredFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileIgnoredToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents FolderdestinationNotSelectedYetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NewFolderWillBeAddedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExistingFolderWillBeUpdatedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents IgnoredFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExistingFolderWillBeDeletedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
 End Class
