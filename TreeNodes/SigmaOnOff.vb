@@ -1,17 +1,19 @@
 ﻿
+Imports System.Collections.Concurrent
+
 Public Class SigmaOnOff
     Inherits OnOff
 
     Private total As Integer = 0
-    Protected list As New List(Of OnOff)
+    Protected list As New ConcurrentBag(Of OnOff)
     Private recomputing As Boolean = False
 
     Public Sub Add(ByVal one As OnOff, Optional ByVal with_node As Boolean = True)
         list.Add(one)
         If with_node Then
-            SyncLock MyBase.Nodes
-                MyBase.Nodes.Add(one)
-            End SyncLock
+            'SyncLock MyBase.Nodes
+            MyBase.Nodes.Add(one)
+            'End SyncLock
         End If
         deltaSizes(one.SelectedSize, one.RealSize)
         AddHandler one.StatusChanged, AddressOf ElementChanged

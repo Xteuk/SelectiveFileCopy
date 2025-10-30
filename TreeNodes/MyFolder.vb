@@ -1,5 +1,7 @@
 ﻿
+Imports System.Collections.Concurrent
 Imports System.IO.Compression
+Imports System.Threading.Tasks
 
 Public Class MyFolder
     Inherits SigmaOnOff
@@ -23,21 +25,39 @@ Public Class MyFolder
 
         Try
             Dim folders = dir.EnumerateDirectories()
-            Dim my_folders As New List(Of MyFolder)
+            Dim my_folders As New ConcurrentBag(Of MyFolder)
             For Each subdir As IO.DirectoryInfo In folders
                 Dim my_folder As New MyFolder(subdir)
                 Add(my_folder)
                 my_folders.Add(my_folder)
             Next
 
-            For Each my_folder As MyFolder In my_folders
-                my_folder.LoadInfos(registerer)
-                registerer.register(my_folder)
-                Count += my_folder.Count
-            Next
+            Parallel.ForEach(my_folders,
+                Sub(my_folder As MyFolder)
+                    my_folder.LoadInfos(registerer)
+                    registerer.register(my_folder)
+                    Count += my_folder.Count
+                End Sub)
+
+            'For Each my_folder As MyFolder In my_folders
+            '    my_folder.LoadInfos(registerer)
+            '    registerer.register(my_folder)
+            '    Count += my_folder.Count
+            'Next
 
             Dim files = dir.EnumerateFiles()
 
+            'Parallel.ForEach(dir.EnumerateFiles,
+            '    Sub(file As IO.FileInfo)
+            '        Try
+            '            Dim my_file As New MyFile(file)
+            '            Add(my_file)
+            '            Count += 1
+            '            registerer.register(my_file)
+            '        Catch ex As Exception
+            '            Dim m = ex.Message
+            '        End Try
+            '    End Sub)
             For Each file As IO.FileInfo In files
                 Dim my_file As New MyFile(file)
                 Add(my_file)
@@ -50,7 +70,7 @@ Public Class MyFolder
                 Selected = CheckState.Unchecked
             End If
 
-        Catch ex As System.Threading.ThreadAbortException
+        Catch ex As Threading.ThreadAbortException
             ' rien
         Catch ex As Exception
             MessageBox.Show(ex.Message)

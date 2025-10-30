@@ -263,6 +263,26 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property Option_IncludeRoot_Off() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Option_IncludeRoot_Off", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Option_IncludeRoot_On() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Option_IncludeRoot_On", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property Pause_16x() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Pause_16x", resourceCulture)
@@ -306,6 +326,26 @@ Namespace My.Resources
         Friend ReadOnly Property RunChecked_16x() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("RunChecked_16x", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property StatusOffline() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("StatusOffline", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property StatusOK() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("StatusOK", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

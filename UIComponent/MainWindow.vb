@@ -22,7 +22,8 @@ Public Class MainWindow
         Me.Icon = My.Resources.iconfinder_move_to_folder_64482
         TabControl1.SelectedIndex = 1
 
-        Configuration.Read()
+        My.Settings.Upgrade()
+        Configuration.PreProcess()
 
     End Sub
 
@@ -30,6 +31,7 @@ Public Class MainWindow
         Try
             NoTreeUpdate = True
             LoadUpdateTimer.Start()
+            Chrono = Stopwatch.StartNew()
 
             CType(MainTreeView.Model, SortedTreeModel).Comparer = New SizeComparer(False)
             CType(FoldersTreeView.Model, SortedTreeModel).Comparer = New SizeComparer(False)
@@ -53,6 +55,8 @@ Public Class MainWindow
         Catch ex As Exception
         Finally
             LoadUpdateTimer.Stop()
+            Chrono.Stop()
+            Chrono = Nothing
         End Try
     End Sub
 
@@ -105,7 +109,7 @@ Public Class MainWindow
     Handles MainTreeView.MouseClick
         Dim tree As TreeViewAdv = sender
         Dim node As TreeNodeAdv = tree.GetNodeAt(tree.PointToClient(MousePosition))
-        tree.SelectedNode = node
+        'tree.SelectedNode = node
         If node Is Nothing Then
             'tree.SelectedNode = Nothing
             Return
@@ -369,19 +373,15 @@ Public Class MainWindow
         End Set
     End Property
 
-    Public Property DestinationType As DestinationTypes
-        Get
-            If My.Settings.DestinationType = "" Then Return Nothing
-            Try
-                Return [Enum].Parse(GetType(DestinationTypes), My.Settings.DestinationType)
-            Catch ex As Exception
-                Return Nothing
-            End Try
-        End Get
-        Set(value As DestinationTypes)
-            My.Settings.DestinationType = value.ToString()
-        End Set
-    End Property
+    Public Property DestinationType As DestinationTypes = GetDefaultDestinationType()
+
+    Private Function GetDefaultDestinationType() As DestinationTypes
+        Try
+            Return [Enum].Parse(GetType(DestinationTypes), My.Settings.LatestDestinationType)
+        Catch ex As Exception
+            Return DestinationTypes.ZipFile
+        End Try
+    End Function
 
     Public Property StatusText As String
         Get
@@ -407,12 +407,13 @@ Public Class MainWindow
         MainTreeView.Enabled = Not CurrentStep = Steps.Running
         FoldersTreeView.Enabled = Not CurrentStep = Steps.Running
         ByTypesTreeView.Enabled = Not CurrentStep = Steps.Running
-        'destinationTypeCB.Enabled = Not CurrentStep = Steps.Running
         destinationPathTBX.Enabled = Not CurrentStep = Steps.Running
-        'destinationPathBTN.Enabled = Not CurrentStep = Steps.Running
 
         ToolStrip1.Enabled = Not CurrentStep = Steps.Running
         MenuStrip1.Enabled = Not CurrentStep = Steps.Running
+
+        RunMI.Enabled = Not String.IsNullOrEmpty(DestinationPath) And Not String.IsNullOrEmpty(InputDirPath)
+        RunTS.Enabled = RunMI.Enabled
 
         Me.Update()
     End Sub
@@ -437,8 +438,12 @@ Public Class MainWindow
     End Sub
 
     Private Sub OnSelectSourceClick(sender As System.Object, e As System.EventArgs) _
-    Handles ToolStripButton1.Click
+    Handles ToolStripButton1.Click, SelectSourceToolStripMenuItem.Click
         Dim browser As New FolderBrowser2
+        Dim defaultPath = InputDirPath
+        If String.IsNullOrEmpty(InputDirPath) Then
+            defaultPath = My.Settings.LatestSource
+        End If
         If InputDirPath <> "" And IO.Directory.Exists(InputDirPath) Then
             browser.DirectoryPath = InputDirPath
         End If
@@ -451,7 +456,10 @@ Public Class MainWindow
 
     Private pb1_ratio As Double = 1
     Private threadRunning As Threading.Thread = Nothing
-    Private Sub OnStartCopyClick(sender As System.Object, e As System.EventArgs) Handles ToolStripButton5.Click, StartCoypingSelectedFilesToolStripMenuItem.Click
+    Private Sub OnStartCopyClick(sender As System.Object, e As System.EventArgs) Handles RunTS.Click, RunMI.Click
+        My.Settings.LatestDestinationType = DestinationType.ToString()
+        My.Settings.LatestDestination = DestinationPath
+        My.Settings.LatestSource = InputDirPath
         StartCopy()
         threadRunning = New Threading.Thread(AddressOf ThreadedCopy)
         threadRunning.Start()
@@ -466,12 +474,16 @@ Public Class MainWindow
         End If
     End Sub
 
+    Private Chrono As Stopwatch = Nothing
     Private Sub LoadUpdateTimer_Tick(sender As Object, e As EventArgs) Handles LoadUpdateTimer.Tick
 
         If registerer.NumFiles = 0 Then
             ProgressLabel2.Text = ""
         Else
-            ProgressLabel2.Text = String.Format("{0:N0} files, {1:N0} folders.", registerer.NumFiles, registerer.NumFolders)
+            If Chrono Is Nothing Then Chrono = Stopwatch.StartNew()
+            Dim elapsed = Chrono.Elapsed.ToString("hh\:mm\:ss")
+            Dim mean = Chrono.ElapsedMilliseconds / registerer.NumFiles
+            ProgressLabel2.Text = String.Format("{0:N0} files, {1:N0} folders. Elapsed: {2}. Mean: {3}ms", registerer.NumFiles, registerer.NumFolders, elapsed, mean)
         End If
 
     End Sub
@@ -482,19 +494,30 @@ Public Class MainWindow
         Select Case DestinationType
             Case DestinationTypes.Folder
                 dirDestBrowseDLG.DirectoryPath = DestinationPath
+                If String.IsNullOrEmpty(DestinationPath) Then
+                    dirDestBrowseDLG.DirectoryPath = My.Settings.LatestDestination
+                End If
                 If dirDestBrowseDLG.ShowDialog(Me) = DialogResult.OK Then
                     DestinationPath = dirDestBrowseDLG.DirectoryPath
                 End If
             Case DestinationTypes.ZipFile
                 fileDestBrowseDLG.FileName = DestinationPath
+                If String.IsNullOrEmpty(DestinationPath) Then
+                    fileDestBrowseDLG.FileName = My.Settings.LatestDestination
+                End If
                 If fileDestBrowseDLG.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     DestinationPath = fileDestBrowseDLG.FileName
                 End If
         End Select
 
-        UpdateUI()
     End Sub
 
+    ''' <summary>
+    ''' Automated selection when mouse hovers over a node
+    ''' (disabled)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub MainTreeView_MouseMove(sender As Object, e As MouseEventArgs) _
     Handles MainTreeView.MouseMove, ByTypesTreeView.MouseMove, FoldersTreeView.MouseMove
         Dim treeView = CType(sender, TreeViewAdv)
@@ -529,11 +552,21 @@ Public Class MainWindow
     Private Sub OnSelectDestinationFolderClick(sender As Object, e As EventArgs) Handles SelectDestinationasFolderToolStripMenuItem.Click, ToolStripButton2.Click
         DestinationType = DestinationTypes.Folder
         OpenSelectFileDialog()
+        UpdateUI()
     End Sub
 
     Private Sub OnSelectDestinationZipFileClick(sender As Object, e As EventArgs) Handles SelectDestinationasZipFileToolStripMenuItem.Click, ToolStripButton3.Click
         DestinationType = DestinationTypes.ZipFile
         OpenSelectFileDialog()
+        UpdateUI()
+    End Sub
+
+    Private OptionsWindow As OptionsWindow = Nothing
+    Private Sub OnShowOptionsClick(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        If OptionsWindow Is Nothing Then
+            OptionsWindow = New OptionsWindow()
+        End If
+        OptionsWindow.ShowDialog(Me)
     End Sub
 
 #End Region

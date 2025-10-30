@@ -1,27 +1,45 @@
 ﻿Imports System.IO
-Imports System.Reflection
-Imports System.Text.Json
 Imports System.Text.RegularExpressions
 
 Public Class Configuration
 
-    Public Shared Sub Read()
-        ' Application folder
-        Dim appFolder As String = Path.GetDirectoryName(
-            Assembly.GetExecutingAssembly().Location)
-        ' Configuration file = app folder / config.json
-        Dim configFile As String = Path.Combine(appFolder, "config.json")
-        ' Read with System.Text.Json
-        Dim json As String = File.ReadAllText(configFile)
-        Dim config = JsonSerializer.Deserialize(Of Configuration)(json)
-        json = Nothing
+    Public Shared Sub Save()
+        My.Settings.Save()
+    End Sub
 
-        If config.IgnoredFolders Is Nothing Then
-            config.IgnoredFolders = New String() {}
+    Public Shared Property CopyIncludesRootFolder As Boolean
+        Get
+            Return My.Settings.CopyIncludesRootFolder
+        End Get
+        Set(value As Boolean)
+            My.Settings.CopyIncludesRootFolder = value
+        End Set
+    End Property
+
+    Public Shared Property IgnoredFolders As String()
+        Get
+            Return My.Settings.IgnoredFolders.Cast(Of String)().ToArray()
+        End Get
+        Set(value As String())
+            My.Settings.IgnoredFolders.Clear()
+            My.Settings.IgnoredFolders.AddRange(value)
+        End Set
+    End Property
+
+    Private Shared ComputedIgnoredFolders As String()
+
+    Public Shared Root As DirectoryInfo
+
+    Public Shared Function IsIgnoredFolder(folder As String) As Boolean
+        If ComputedIgnoredFolders Is Nothing Then
+            PreProcess()
         End If
+        Return ComputedIgnoredFolders.Any(Function(x) Regex.IsMatch(folder, x))
+    End Function
 
+    Public Shared Sub PreProcess()
         Dim folders = New List(Of String)()
-        For Each path As String In config.IgnoredFolders
+        For Each path As String In My.Settings.IgnoredFolders.Cast(Of String)()
             If (path.StartsWith("**/")) Then
                 Dim subr = path.Substring(3)
                 folders.Add(ToRegex(subr))
@@ -30,31 +48,15 @@ Public Class Configuration
                 folders.Add(ToRegex(path))
             End If
         Next
-        config.IgnoredFolders = folders.ToArray()
-        inst = config
+        ComputedIgnoredFolders = folders.ToArray()
     End Sub
 
-    Public Shared Function ToRegex(path As String) As String
+    Private Shared Function ToRegex(path As String) As String
         path = Regex.Replace(path, "([.+\[\]\\\(\)])", "\$1")
         path = Regex.Replace(path, "/", "\")
         path = path.Replace("*", "[^/\\]*")
         path = path.Replace("?", ".")
         Return "^" + path + "$"
-    End Function
-
-    Private Shared inst As Configuration = Nothing
-    Public Shared ReadOnly Property Instance As Configuration
-        Get
-            If inst Is Nothing Then Read()
-            Return inst
-        End Get
-    End Property
-
-    Public Property IgnoredFolders As String()
-    Public Shared Root As DirectoryInfo
-
-    Public Shared Function IsIgnoredFolder(folder As String) As Boolean
-        Return Instance.IgnoredFolders.Any(Function(x) Regex.IsMatch(folder, x))
     End Function
 
 End Class

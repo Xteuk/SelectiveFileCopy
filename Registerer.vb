@@ -1,4 +1,5 @@
 ﻿
+Imports System.Collections.Concurrent
 Imports Aga.Controls.Tree
 
 Public Class Registerer
@@ -6,16 +7,15 @@ Public Class Registerer
     Public ByTypes As New TreeModel
     Public ByNames As New TreeModel
     Public Folders As New TreeModel
-    'Public UpdateFunction As Func(Of Integer)
 
-    Private mapByTypes As New Dictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
-    Private mapByName As New Dictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
-    Private mapByFolder As New Dictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
+    Private mapByTypes As New ConcurrentDictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
+    Private mapByName As New ConcurrentDictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
+    Private mapByFolder As New ConcurrentDictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
 
     Public Sub PostProcess()
-        mapByTypes = New Dictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
-        mapByName = New Dictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
-        mapByFolder = New Dictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
+        mapByTypes = New ConcurrentDictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
+        mapByName = New ConcurrentDictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
+        mapByFolder = New ConcurrentDictionary(Of String, SigmaOnOff)(StringComparer.OrdinalIgnoreCase)
 
     End Sub
 
@@ -28,7 +28,7 @@ Public Class Registerer
 
     Public Function getNode(ByVal parent As TreeModel, ByVal name As String) As SigmaOnOff
         'Dim node As SigmaOnOff = parent.Nodes.Where(Function(x) x.Text = name).FirstOrDefault()
-        Dim dict As Dictionary(Of String, SigmaOnOff)
+        Dim dict As ConcurrentDictionary(Of String, SigmaOnOff)
         If parent Is ByTypes Then
             dict = mapByTypes
         ElseIf parent Is ByNames Then
@@ -44,7 +44,7 @@ Public Class Registerer
         If node Is Nothing Then
             node = New SigmaOnOff() With {.Text = name}
             parent.Nodes.Add(node)
-            dict.Add(name, node)
+            dict.TryAdd(name, node)
         End If
         Return node
     End Function

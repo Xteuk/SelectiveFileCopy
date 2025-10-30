@@ -8,11 +8,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6816FBAF-E05E-4DF9-B4FD-BFE005F50849}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>SelectiveFileCopy.My.MyApplication</StartupObject>
+    <StartupObject>SelectiveFileCopy.Program</StartupObject>
     <RootNamespace>SelectiveFileCopy</RootNamespace>
     <AssemblyName>SelectiveFileCopy</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
@@ -106,6 +106,8 @@
     <Compile Include="Configuration.vb" />
     <Compile Include="Enums\Steps.vb" />
     <Compile Include="Helper.vb" />
+    <Compile Include="Program.vb" />
+    <Compile Include="ProgramArguments.vb" />
     <Compile Include="TreeNodes\NameComparer.vb" />
     <Compile Include="TreeNodes\SizeComparer.vb" />
     <Compile Include="Enums\DestinationTypes.vb" />
@@ -135,12 +137,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UIComponent\Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UIComponent\Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UIComponent\OnFileExists.Designer.vb">
       <DependentUpon>OnFileExists.vb</DependentUpon>
     </Compile>
@@ -150,6 +146,12 @@
     <Compile Include="TreeNodes\OnOff.vb" />
     <Compile Include="Registerer.vb" />
     <Compile Include="TreeNodes\SigmaOnOff.vb" />
+    <Compile Include="Options\OptionsWindow.Designer.vb">
+      <DependentUpon>OptionsWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Options\OptionsWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UIComponent\MainWindow.resx">
@@ -162,20 +164,16 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIComponent\Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="UIComponent\OnFileExists.resx">
       <DependentUpon>OnFileExists.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Options\OptionsWindow.resx">
+      <DependentUpon>OptionsWindow.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="config.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -188,9 +186,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Options\Option_IncludeRoot_On.png" />
     <Content Include="Resources\iconfinder_move_to_folder_64482.ico" />
     <Content Include="Resources\pn-add-source-copy.gif" />
     <Content Include="Resources\pn-add-source-copy.ico" />
+    <Content Include="Options\Option_IncludeRoot_Off.png" />
+    <Content Include="UIComponent\StatusOffline.png" />
+    <Content Include="UIComponent\StatusOK.png" />
     <None Include="Resources\AddFile_16x21.png" />
     <None Include="Resources\ASX_Copy_blue_16x.png" />
     <None Include="Resources\AddFile_16x.png" />
@@ -250,6 +252,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser">
+      <Version>2.9.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

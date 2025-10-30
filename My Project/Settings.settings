@@ -2,11 +2,28 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="SaveFilePath" Type="System.String" Scope="User">
+    <Setting Name="CopyIncludesRootFolder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="IgnoredFolders" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;string&gt;**/.vs&lt;/string&gt;
+  &lt;string&gt;**/.git&lt;/string&gt;
+  &lt;string&gt;**/bin&lt;/string&gt;
+  &lt;string&gt;**/obj&lt;/string&gt;
+  &lt;string&gt;**/packages&lt;/string&gt;
+  &lt;string&gt;**/Setup&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="LatestSource" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DestinationType" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Folder</Value>
+    <Setting Name="LatestDestination" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LatestDestinationType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ZipFile</Value>
     </Setting>
   </Settings>
 </SettingsFile>

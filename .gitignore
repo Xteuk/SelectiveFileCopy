@@ -9,4 +9,5 @@
 **/*.suo
 **/*.vbproj.user
 
-/packages
+**/packages
+**/MigrationBackup
